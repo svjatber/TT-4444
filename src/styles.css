@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+}
+
+dialog > h3 {
+  text-align: center;
+}
+
+#color {
+  height: 50px;
+  width: 100px;
+  margin: 20px 0px;
+}
