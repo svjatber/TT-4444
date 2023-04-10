@@ -15,7 +15,7 @@ ctx.font = `${RADIUS * 1.5}px serif`;
 
 class Shape {
   _mark = false;
-  constructor(x, y, color) {
+  constructor(x, y, color = null) {
     this.x = x;
     this.y = y;
     this._color = color;
@@ -66,7 +66,7 @@ let modalState = null;
 canvas.addEventListener(
   "click",
   function (evt) {
-    var rect = evt.target.getBoundingClientRect();
+    const rect = evt.target.getBoundingClientRect();
 
     let x = evt.clientX - rect.left;
     let y = evt.clientY - rect.top;
@@ -97,9 +97,8 @@ const generate = function () {
 
     requestAnimationFrame(function animate(time) {
       let timeFraction = (time - start) / duration;
-      if (timeFraction > 1) timeFraction = 1;
 
-      if (timeFraction === 1) {
+      if (timeFraction > 1) {
         for (let i = 0; i < ANIMATED_SHAPES; i++) {
           const i = Math.floor(Math.random() * ITERATION);
           let color = randomColor();
@@ -128,8 +127,9 @@ const generate = function () {
 
     let color = randomColor();
 
-    fillCanvasCircle(x, y, color);
-    shapes.push(new Shape(x, y, color));
+    const shape = new Shape(x, y)
+    shape.color = color
+    shapes.push(shape);
   }
 
   animate(DURATION);
